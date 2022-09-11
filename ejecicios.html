@@ -9,31 +9,63 @@
   <body>
     <h1>EJERCICIOS JS</h1>
     <p id="mostrar"></p>
+    <p id="mostrar2"></p>
     <script>
-    /* 1) Programa una función que cuente el número de caracteres de una cadena de
-    texto, pe. miFunción("Hola Mundo") devolverá 10 */
-      function countCad(cadena) {
-        for (let i = 0; i < cadena.length; i++) {
-          console.log(cadena[i]);
+    /*1) Programa una función que cuente el número de caracteres de una cadena de
+    texto, pe. miFunción("Hola Mundo") devolverá 10 
+      try {
+        function countCad(cadena) {
+          for (let i = 0; i < cadena.length; i++) {
+            console.log(cadena[i]);
+          }
+          console.log(`El numero de caracteres es: ${cadena.length}`);
         }
-        console.log(`El numero de caracteres es: ${cadena.length}`);
-      }
-
-      let cad = prompt("Ingresa la cadena");
-
-      countCad(cad);
-      document.getElementById("mostrar").innerHTML = 
-      `Cadena: ${cad}<br>El numero de caracteres es: ${cad.length}`;
+        let cad = prompt("Ingresa la cadena");
+        countCad(cad);
+        document.getElementById("mostrar").innerHTML = 
+        `Cadena: ${cad}<br>El numero de caracteres es: ${cad.length}`;
+      } catch (error) {
+        console.log("Ingresa nuevamente la cadena")
+      }*/
 
     /*2) Programa una función que te devuelva el texto recortado según el número de
-    caracteres indicados,
-    I pe. miFunción("Hola Mundo", 4) devolverá "Holai' A/
-    3) Programa una función que dada una String te devuelva un Array de textos
-    separados por cierto caracter, pe.
-    miFuncion('hola que tal', devolverá ['hola•, 'que', 'talil i/
-    4) Programa una función que repeta un texto X veces, pe. miFuncion('Hola
-    Mundo', 3) devolverá Hola Mundo Hola Mundo
-    Hola Mundo */
+    caracteres indicados, pe. miFunción("Hola Mundo", 4) devolverá "Holai' 
+    function cortar(cadena,posicion){
+      let cadCortada = cadena.slice(0,posicion) 
+      console.log(`La cadena original es: ${cadena} y se corta en la posicion ${posicion}. La nueva cadena es ${cadSeparada}`)
+      document.getElementById("mostrar").innerHTML = 
+        `La cadena original es: ${cadena} y se corta en la posicion ${posicion}.<br>La nueva cadena es <b>${cadSeparada}</b>`;
+    }
+    cortar("hola mundo",4)*/
+
+    /*3) Programa una función que dada una String te devuelva un Array de textos
+    separados por cierto caracter, pe. miFuncion('hola que tal', devolverá ['hola•, 'que', 'tal' 
+    let frase = "hola que tal"
+    function separar(cadena) {
+      let cadSeparada = cadena.split(" ")
+      return cadSeparada
+    }
+    console.log(separar(frase))
+
+    let arrayfrase = separar(frase)
+    document.getElementById("mostrar").innerHTML = 
+        `La cadena: ${frase} es separada por cada palabra <br>`
+    for (const i of arrayfrase) {
+      document.getElementById("mostrar2").innerHTML += `${i} - `
+    }*/
+
+    /*4) Programa una función que repita un texto X veces, pe. miFuncion('HolaMundo', 3) 
+    devolverá Hola Mundo Hola Mundo Hola Mundo 
+    function repetir(cadena,veces) {
+      if (veces < 2 && veces >= 0){
+        throw new RangeError("El numero de veces debe ser mayor que 1")
+      }
+      let cadRepetida = cadena.repeat(veces)
+      console.log(cadRepetida)
+    }
+    repetir("hola mundo", 9)*/
+    
+    
     </script>
   </body>
 </html>
