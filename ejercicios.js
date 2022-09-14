@@ -125,7 +125,7 @@ repetir("h ", 3); */
 
 /* 11) Programa una función que calcule el factorial de un número 
   (El factorial de un entero positivo n, se define como el producto de 
-  todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120 */
+  todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120 
 
   const factorial = (numero) => {
     let fac = numero 
@@ -134,4 +134,62 @@ repetir("h ", 3); */
     }
     return fac
   }
-  console.info(factorial(6))
+  console.info(factorial(6))*/
+
+/* 12) Programa una función que determine si un número es primo 
+(aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+
+const esPrimo = (num) => (typeof num !== 'number') 
+? console.warn("No es un numero")
+: (num%1!== 0) 
+  ? console.warn("No es un numero entero")
+  : (num === 0) 
+    ? console.warn("No se acepta cero")
+    : (num%2!==0)
+
+console.info(esPrimo(0))*/
+
+/* 13) Programa una función que determine si un número es par o impar, pe.
+miFuncion(29) devolverá Impar.
+
+const ParImpar = {
+  Par:"par" ,
+  Impar:"impar"
+}
+
+const ParOImpar = (num) => (typeof num !== 'number') 
+? console.warn("No es un numero")
+: (num%1!== 0)
+  ? console.warn("No es un numero entero")
+  : (num === 0)
+    ? console.warn("No se acepta cero")
+    : (num%2 === 0) 
+      ? ParImpar.Par
+      : ParImpar.Impar
+
+console.info(ParOImpar(2))*/
+
+/* 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, 
+pe. miFuncion(0,"C") devolverá 32°F. 
+
+const toFahrenheit = (grados = 0, tipo = "") => {
+  if (typeof grados !== 'number') {
+    return console.warn("El grado no es un numero")
+  } 
+  if (typeof tipo !== 'string') {
+    return console.warn("El tipo no es un string")
+  } 
+  let fa , cel 
+    switch (tipo) {
+      case "F":
+        fa = 32 + (grados * 1.8)
+        console.log(`${fa}°F`)
+        break;
+      case "C":
+        cel = (grados - 32) * (5/9)
+        console.log(`${cel}°C`)
+        break;
+    }
+}
+
+toFahrenheit(32,"C")*/
