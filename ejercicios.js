@@ -1,4 +1,4 @@
-/*1) Programa una función que cuente el número de caracteres de una cadena de
+/*1) Programa una función que cuente el número de caracteres de una caden
     texto, pe. miFunción("Hola Mundo") devolverá 10 
       try {
         function countCad(cadena) {
@@ -107,47 +107,90 @@ repetir("h ", 3); */
   eliminar("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz")*/
 
 /*9) Programa una función que obtenga un numero aleatorio entre 501 y 600.
-    const aleatorio = () => Math.ceil(Math.random() * (600 - 501) + 501)
+    const aleatorio = () => Math.ceil((Math.random() * 99) + 501)
     console.info(aleatorio())*/
 
 /* 10) Programa una función que reciba un número y evalúe si es capicúa o no 
-(que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.
-    const capicua = (num) =>
+(que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.*/
+    /* const capicua = (num = 0) =>
       (typeof num !== 'number') 
       ? console.warn("No es un numero")
       : (num%1!== 0) 
         ? console.warn("No es un numero entero")
         : (num === 0) 
           ? console.warn("No se acepta cero")
-          : (num.toString().split("").reverse().join("") === num.toString())
+          : (num.toString().split("").reverse().join("") === num.toString()) 
+            ? console.log(true) : console.log(false);
     
-    console.info(capicua(2002))*/
+    capicua(1203) */
+    /* const capicua = (num = 0) => {
+      if (typeof num !== 'number') return console.warn("No es un numero");
+
+      if (num%1!== 0) return console.warn("No es un numero entero")
+
+      if (num === 0) return console.warn("No se acepta cero")
+      
+      numero = num.toString()
+      let numRevez = numero.split("").reverse().join("");
+      return (numRevez === numero) 
+        ? console.info(`si es capicua ${numero} a ${numRevez}`) : console.info("no es capicua");
+    }
+
+    capicua(2.2) */
 
 /* 11) Programa una función que calcule el factorial de un número 
   (El factorial de un entero positivo n, se define como el producto de 
   todos los números enteros positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120 
 
-  const factorial = (numero) => {
+  const factorial = (numero = undefined) => {
+    if (numero === undefined) return console.warn("No ingresaste un numero");
+    if (typeof numero !== 'number') return console.warn("No es un numero");
+    if (numero%1!== 0) return console.warn("No es un numero entero")
+    if (numero === 0) return console.warn("No se acepta cero")
+    
     let fac = numero 
     for (let i = 1; i < numero; i++) {
       fac *= (numero - i)
     }
-    return fac
+    
+    // otra forma 
+    let fac = 1
+    for (let i = numero; i >1; i--) {
+      fac *= i;
+    }
+    return console.log(`El factorial es ${fac}`);
   }
-  console.info(factorial(6))*/
+  factorial(4)*/
 
 /* 12) Programa una función que determine si un número es primo 
 (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
 
-const esPrimo = (num) => (typeof num !== 'number') 
-? console.warn("No es un numero")
-: (num%1!== 0) 
-  ? console.warn("No es un numero entero")
-  : (num === 0) 
-    ? console.warn("No se acepta cero")
-    : (num%2!==0)
+const esPrimo = (num) => {
+  if (num === undefined) return console.warn("No ingresaste un numero");
+  if (typeof num !== 'number') return console.warn("No es un numero");
+  if (num%1!== 0) return console.warn("No es un numero entero")
+  if (num === 0) return console.warn("No se acepta cero")
+  if (num === 1) return console.warn("No se acepta 1")
+  if (Math.sign(num)===-1) return console.warn("No se acepta numeros negativos")
+  
+  let divisible = false;
 
-console.info(esPrimo(0))*/
+  for (let i = 2; i < num; ++i) {
+    if (num % i === 0) {
+      divisible = true
+      break;
+    }
+  }
+
+  return (divisible) 
+  ? console.log("No es primo")
+  : console.log("Si es primo");
+}
+
+esPrimo(0)
+esPrimo(1)
+esPrimo(-1)
+esPrimo(2)*/
 
 /* 13) Programa una función que determine si un número es par o impar, pe.
 miFuncion(29) devolverá Impar.
@@ -171,16 +214,14 @@ console.info(ParOImpar(2))*/
 
 /* 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, 
 pe. miFuncion(0,"C") devolverá 32°F. 
+const convertirGrados = (grados = undefined, tipo = undefined) => {
+  if (grados === undefined) return console.warn("No has colocado ningun numero");
+  if (tipo === undefined) return console.warn("No has colocado ninguna unidad");
+  if (typeof grados !== 'number') return console.warn("El grado no es un numero")
+  if (typeof tipo !== 'string') return console.warn("El tipo no es un string")
 
-const toFahrenheit = (grados = 0, tipo = "") => {
-  if (typeof grados !== 'number') {
-    return console.warn("El grado no es un numero")
-  } 
-  if (typeof tipo !== 'string') {
-    return console.warn("El tipo no es un string")
-  } 
   let fa , cel 
-    switch (tipo) {
+    switch (tipo.toUpperCase()) {
       case "F":
         fa = 32 + (grados * 1.8)
         console.log(`${fa}°F`)
@@ -189,7 +230,9 @@ const toFahrenheit = (grados = 0, tipo = "") => {
         cel = (grados - 32) * (5/9)
         console.log(`${cel}°C`)
         break;
+      default: 
+        console.warn("No existe esa unidad");
     }
 }
 
-toFahrenheit(32,"C")*/
+convertirGrados(20,"f")*/
