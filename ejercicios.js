@@ -149,9 +149,9 @@ repetir("h ", 3); */
     if (numero === 0) return console.warn("No se acepta cero")
     
     let fac = numero 
-    for (let i = 1; i < numero; i++) {
+    for (let i = 1; i < numero - 1; i++) {
       fac *= (numero - i)
-    }
+    } 
     
     // otra forma 
     let fac = 1
@@ -160,8 +160,7 @@ repetir("h ", 3); */
     }
     return console.log(`El factorial es ${fac}`);
   }
-  factorial(4)*/
-
+  factorial(6)*/
 /* 12) Programa una función que determine si un número es primo 
 (aquel que solo es divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
 
@@ -234,5 +233,90 @@ const convertirGrados = (grados = undefined, tipo = undefined) => {
         console.warn("No existe esa unidad");
     }
 }
-
 convertirGrados(20,"f")*/
+/*15) Programa una función para convertir números de base binaria a decimal y viceversa, 
+pe. miFuncion(100,2) devolverá 4 base 10.
+const binaryDecimal = (numero = undefined, base= undefined) => {
+  if (numero === undefined) return console.warn("No has colocado ningun parametro");
+  if (base === undefined) return console.warn("No has colocado ninguna base");
+  if (typeof numero !== 'number') return console.warn("El numero no es un numero");
+  if (typeof base !== 'number') return console.warn("La base no es un numero");
+
+  switch (base) {
+    case 2:
+      return console.log(`${numero} en base ${base} = ${parseInt(numero,base)} base 10`);
+    case 10:
+      return console.log(`${numero} en base ${base} = ${numero.toString(2)} base 2`);
+    default:
+      return console.warn(`La base no puede ser ${base}`);
+  }
+}
+binaryDecimal(100,2);*/
+
+/*16) Programa una función que devuelva el monto final después de aplicar un descuento a una 
+cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+const discount = (cantidad = undefined, discount = undefined) => {
+  if (cantidad === undefined) return console.warn("No has colocado ningun parametro");
+  if (discount === undefined) return console.warn("No has colocado ningun descuento");
+  if (typeof cantidad !== 'number') return console.warn("La cantidad no es un numero");
+  if (typeof discount !== 'number') return console.warn("El descuento no es un numero");
+  if (Math.sign(cantidad) === -1) return console.warn("La cantidad no puede ser negativa");
+  if (Math.sign(discount) === -1) return console.warn("La cantidad no puede ser negativa");
+  if (cantidad === 0 || discount === 0) return console.warn("No puede ser cero");
+
+  let res = cantidad - (cantidad * (discount/100));
+  return console.log(`Se le aplico el ${discount}% descuento a ${cantidad} : ${res}`);
+}
+discount(110,10);*/
+
+/*17) Programa una función que dada una fecha válida determine cuantos años han pasado hasta 
+el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+const cantidadAnios = (fecha = undefined) => {
+  if (fecha === undefined) return console.warn("No has colocado ningun parametro");
+  if (!(fecha instanceof Date)) return console.warn("No es una fecha");
+  // if (Math.sign(fecha) === -1) return console.warn("La cantidad no puede ser negativa"); 
+  // if (fecha === 0) return console.warn("No puede ser cero");
+
+  //la diferencia entre milisegundos resuelve los años pasados
+  let restaMS = new Date().getTime() - fecha.getTime();
+  let anioEnMS = 1000 * 60 * 60 * 24 * 365;
+  let anios = Math.floor(restaMS / anioEnMS);
+
+  return (Math.sign(anios) === -1) ? console.log(`Faltan ${Math.abs(anios)} años para ${fecha.getFullYear()}`) :
+  (Math.sign(anios) === 1) ? console.log(`Faltan ${Math.abs(anios)} años`)
+  : console.log("Estamos en el año actual");
+}
+cantidadAnios(new Date(1984,10,4));
+cantidadAnios(new Date(2070,10,25))*/
+
+/*18) Programa una función que dada una cadena de texto cuente el número de vocales y 
+      consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+
+      const contarVocCons = (cadena = undefined) =>{
+        if (typeof cadena !== "string" ) return console.log("No es una cadena, no se puede analizar");
+        if (cadena === "") return console.log("Ingresa un texto");
+
+        let vocalesIn = cadena.match(/[aeiou]/gi);
+        let consonantesIn = cadena.match(/[bcdfghjklmnñpqrstvwxyz]/gi)
+        
+        console.log(`En el texto hay ${vocalesIn.length} vocales y ${consonantesIn.length} consonantes`);
+      }
+      contarVocCons("holam unfoñ");*/
+
+/*19) Programa una función que valide que un texto sea un nombre válido, 
+      pe. miFuncion("Jonathan MirCha") devolverá verdadero.
+  20) Programa una función que valide que un texto sea un email válido, 
+  pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
+      const validarNombreEmail = (nombre = "", email = "") => {
+        if (typeof nombre !== "string" || typeof email !== "string") return console.error("No es un texto, no se puede analizar");
+        if (!nombre || !email) return console.warn("Ingresa un texto");
+
+        let nomValido = /^[A-Za-z\sÁ-Úá-úÑñÜü]+$/g.test(nombre);
+        let emailValido = /^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$/i.test(email);
+
+        (nomValido) ? console.log("Nombre si es valido") : console.log("Nombre no es valido");
+        (emailValido) ? console.log("Email si es valido") : console.log("Email no es valido");
+      }
+
+      validarNombreEmail("diego marcos portugal","20185605@unica.edu.pe");*/
+
