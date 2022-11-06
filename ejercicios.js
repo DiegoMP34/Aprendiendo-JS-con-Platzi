@@ -305,7 +305,7 @@ cantidadAnios(new Date(2070,10,25))*/
 
 /*19) Programa una función que valide que un texto sea un nombre válido, 
       pe. miFuncion("Jonathan MirCha") devolverá verdadero.
-  20) Programa una función que valide que un texto sea un email válido, 
+20) Programa una función que valide que un texto sea un email válido, 
   pe. miFuncion("jonmircha@gmail.com") devolverá verdadero.
       const validarNombreEmail = (nombre = "", email = "") => {
         if (typeof nombre !== "string" || typeof email !== "string") return console.error("No es un texto, no se puede analizar");
@@ -320,3 +320,114 @@ cantidadAnios(new Date(2070,10,25))*/
 
       validarNombreEmail("diego marcos portugal","20185605@unica.edu.pe");*/
 
+/* Fusion 19 y 20
+
+      const validarPatron = (nombre = "", patron = undefined) => {
+        if (!nombre) return console.warn("Ingresa un texto");
+        if (patron === undefined) return console.warn("Ingresa un patron");
+        if (typeof nombre !== "string") return console.error("No es un texto, no se puede analizar");
+        if (!(patron instanceof RegExp)) return console.error("No es una expresion regular, no se puede analizar");
+
+        (patron.test(nombre)) ? console.log("Si es valido") : console.log("No es valido");;
+      }
+      validarPatron("1hola123",/^[a-zA-Z]+$/g);*/
+
+/*21) Programa una función que dado un array numérico devuelve otro array con los números 
+elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+
+      const elevarCuadrado = (elems = undefined) => {
+        if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+        if (elems.length === 0) return console.warn("No hay elementos");
+        if (!(elems instanceof Array)) return console.error("No es un array");
+
+        // let elemsCuadrado = [];
+
+        // 1era forma
+        for (let i = 0; i < elems.length; i++) {
+          elemsCuadrado = Math.pow(elems[i],2);
+        } 
+
+        // 2da forma
+        for (const elem of elems) {
+          elemsCuadrado.push(Math.pow(elem,2));
+        }
+
+        // 3er forma
+        for (const elem of elems) {
+          if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+        }
+        const elemsCuadrado = elems.map(e => e * e);
+
+        console.log(`[${elemsCuadrado.toString()}]`);
+      }
+      elevarCuadrado([2,4,3]);*/
+
+/*22) Programa una función que dado un array devuelva el número mas alto y el más bajo 
+de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+
+      const masAltoBajo = (elems = undefined) => {
+        if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+        if (elems.length === 0) return console.warn("No hay elementos");
+        if (!(elems instanceof Array)) return console.error("No es un array");
+
+        //una forma mas compleja.
+        let elemsMaxMin = [];
+
+        elems.sort((a,b) => b - a);
+        elemsMaxMin.push(elems.shift());
+        elemsMaxMin.push(elems.pop());
+        
+        //otra forma mas facil
+        for (const elem of elems) {
+          if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+        }
+        return console.log(`Array anterior [${elems}] -> Mayor valor: ${Math.max(...elems)} 
+          Valor menor: ${Math.min(...elems)}`);
+      }
+      masAltoBajo([2,3,1,-10,1000,-20.4]);*/
+
+/*23) Programa una función que dado un array de números devuelva un objeto con 2 arreglos en 
+el primero almacena los números pares y en el segundo los impares, 
+pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+
+const arrayParImpar = (elems = undefined) => {
+  if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+  if (elems.length === 0) return console.warn("No hay elementos");
+  if (!(elems instanceof Array)) return console.error("No es un array");
+
+  for (const elem of elems) {
+    if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+  }
+
+  const objParImpar = { "Pares": elems.filter(e => e%2 === 0),
+  "Impares": elems.filter(e => e%2 !== 0)}
+
+  return console.log(`Tu array [${elems}]: Elementos pares -> [${objParImpar["Pares"]}] 
+    Elementos impares -> [${objParImpar["Impares"]}]`);
+};
+
+arrayParImpar([2,4,5,6,7,9]);*/
+
+/*24) Programa una función que dado un arreglo de números devuelva un objeto con dos arreglos,
+ el primero tendrá los numeros ordenados en forma ascendente y el segundo de forma descendiente,
+ pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], desc: [8,7,7,6,5] }.
+
+ const arrayAscDesc = (elems = undefined) => {
+  if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+  if (elems.length === 0) return console.warn("No hay elementos");
+  if (!(elems instanceof Array)) return console.error("No es un array");
+
+  for (const elem of elems) {
+    if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+  }
+
+  const elemsAsc = elems.sort((a,b) => a-b);
+
+  return console.log(`Array [${elems}] -> asc: [${elemsAsc}] des: [${elemsAsc.reverse()}]`);
+};
+arrayAscDesc([7,5,7,8,6,10])
+
+let arr = [2,3,6,1,4,2,1,4,6,3,1,-1,10]
+  console.log(arr.sort((a,b)=>a-b).reverse());*/
+// 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+// 26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
