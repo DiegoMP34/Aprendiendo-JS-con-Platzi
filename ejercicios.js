@@ -429,5 +429,55 @@ arrayAscDesc([7,5,7,8,6,10])
 
 let arr = [2,3,6,1,4,2,1,4,6,3,1,-1,10]
   console.log(arr.sort((a,b)=>a-b).reverse());*/
-// 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
-// 26) Programa una función que dado un arreglo de números obtenga el promedio, pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+/* 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, 
+pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) devolverá ["x", 10, 2, "10", true].
+
+const deleteDupl = (elems = undefined)=>{
+  if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+  if (elems.length === 0) return console.warn("No hay elementos");
+  if (!(elems instanceof Array)) return console.error("No es un array");
+  if (elems.length === 1) return console.warn("El numero de elementos para evaluar debe ser al menos 2");
+
+  //otra forma
+  // return console.log({
+  //   elems,
+  //   arrSinDupl : elems.filter((value,index,self) => self.indexOf(value) === index)
+  // });
+
+  //usamos un nuevo tipo de objeto es set, que su naturaleza es no permitir que sus elementos sean duplicados
+  return console.log({
+    elems,
+    arrSinDupl: [...new Set(elems)]
+  });
+}
+
+deleteDupl(["x", 10, "x", 2, "10", 10, true, true])*/
+/* 26) Programa una función que dado un arreglo de números obtenga el promedio, 
+pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.*/
+
+const promedio = (elems = undefined) => {
+  if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
+  if (elems.length === 0) return console.warn("No hay elementos");
+  if (!(elems instanceof Array)) return console.error("No es un array");
+
+  for (const elem of elems) {
+    if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+  }
+  /* let sumElems = 0;
+
+  for (const elem of elems) {
+    if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
+    sumElems += elem;
+  }
+  return console.log(sumElems/elems.length); */
+
+  //otra forma con reduce
+  return console.info(elems.reduce((acc,valorAct,index,arr) => {
+    acc += valorAct
+    if (index === arr.length-1) return acc/arr.length
+    else return acc;
+  }));
+
+};
+
+promedio([9,8,7,6,5,4,3,2,1,0]);
