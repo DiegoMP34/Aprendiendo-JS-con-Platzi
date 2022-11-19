@@ -453,7 +453,7 @@ const deleteDupl = (elems = undefined)=>{
 
 deleteDupl(["x", 10, "x", 2, "10", 10, true, true])*/
 /* 26) Programa una función que dado un arreglo de números obtenga el promedio, 
-pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.*/
+pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
 
 const promedio = (elems = undefined) => {
   if (elems === undefined) return console.warn("No has ingresado un arreglo de datos");
@@ -463,13 +463,13 @@ const promedio = (elems = undefined) => {
   for (const elem of elems) {
     if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
   }
-  /* let sumElems = 0;
+   let sumElems = 0;
 
   for (const elem of elems) {
     if (!(typeof elem === "number")) return console.error("Todos los elementos deben ser numeros");
     sumElems += elem;
   }
-  return console.log(sumElems/elems.length); */
+  return console.log(sumElems/elems.length); 
 
   //otra forma con reduce
   return console.info(elems.reduce((acc,valorAct,index,arr) => {
@@ -480,4 +480,176 @@ const promedio = (elems = undefined) => {
 
 };
 
-promedio([9,8,7,6,5,4,3,2,1,0]);
+promedio([9,8,7,6,5,4,3,2,1,0]);*/
+
+/*27) Programa una clase llamada Pelicula.
+
+La clase recibirá un objeto al momento de instanciarse con los siguentes 
+datos: id de la película en IMDB, titulo, director, año de estreno, país o países de origen, 
+géneros y calificación en IMBD.
+    - Todos los datos del objeto son obligatorios.
+    - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 7 restantes números.
+    - Valida que el título no rebase los 100 caracteres.
+    - Valida que el director no rebase los 50 caracteres.
+    - Valida que el año de estreno sea un número entero de 4 dígitos.
+    - Valida que el país o paises sea introducidos en forma de arreglo.
+    - Valida que los géneros sean introducidos en forma de arreglo.
+    - Valida que los géneros introducidos esten dentro de los géneros aceptados*.
+    - Crea un método estático que devuelva los géneros aceptados*.
+    - Valida que la calificación sea un número entre 0 y 10 pudiendo ser decimal de una posición.
+    - Crea un método que devuelva toda la ficha técnica de la película.
+  - Apartir de un arreglo con la información de 3 películas genera 3 instancias de la clase de forma 
+    automatizada e imprime la ficha técnica de cada película.
+
+* Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, 
+Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, 
+Sport, Talk-Show, Thriller, War, Western.*/
+
+class Pelicula{
+  constructor({id, titulo, director, anioEstreno, pais, generos, calificacion}) {
+    this.id = id;
+    this.titulo = titulo;
+    this.director = director;
+    this.anioEstreno = anioEstreno;
+    this.pais = pais;
+    this.generos = generos;
+    this.calificacion = calificacion;
+
+    this.validarId(this.id);
+    this.validarTitulo(this.titulo);
+    this.validarDirector(this.director);
+    this.validarAnioEstreno(this.anioEstreno);
+    this.validarPaises(this.pais);
+    this.validarGeneros(this.generos);
+    this.validarCalificacion(this.calificacion)
+  }
+
+  //creamos el getter estatico
+  static get listaGeneros (){
+    return ["Action", "Adult", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary" ,"Drama", "Family", 
+      "Fantasy", "Film Noir", "Game-Show", "History", "Horror", "Musical", "Music", "Mystery", "News", "Reality-TV", "Romance", "Sci-Fi", "Short", 
+      "Sport", "Talk-Show", "Thriller", "War", "Western"]
+  }
+
+  static generosAceptados (){
+    return console.info(`Los generos aceptados son: ${Pelicula.listaGeneros.join(", ")}`)
+  }
+
+  //validaciones de tipos de dato
+  validarCadenas(propiedad, valor){
+    if(!valor) return console.warn(`${propiedad}: esta vacio`);
+    if(typeof valor !== "string") return console.error(`(${propiedad} = ${valor}) ingresado, no es una cadena`);
+    return true;
+  }
+  validarLongitudCadena(propiedad, valor, longitud){
+    if(valor.lenght > longitud) return console.error(`${propiedad} "${valor}" ingresado excede el numero de caracteres (100)`);
+    return true
+  }
+  validarNumero(propiedad, valor){
+    if(!valor) return console.warn(`${propiedad}: esta vacio`);
+    if(typeof valor !== "number") return console.error(`(${propiedad} = ${valor}) ingresado, no es un numero`);
+    return true;
+  }
+  validarArreglo(propiedad,arr){
+    if(!arr) return console.warn(`${propiedad}: esta vacio`);
+    if(!(arr instanceof Array)) return console.error(`(${propiedad} = ${arr}) No es un array`)
+    if(arr.length === 0) return console.error(`${propiedad} = ${arr}: No tiene datos`);
+    for (const el of arr) {
+      if(!(this.validarCadenas(propiedad,el))) return; //negarlo para el for
+    }
+    return true;
+  }
+
+  //validacion para los atributos
+  validarId(id){
+    if(this.validarCadenas("IMDB id",id))
+      if(!(/^([a-z]{2})([0-9]{7})$/.test(id))) 
+        return console.error(`${id} no se acepta: Debe tener 9 caracteres, los dos primeros caracteres deben ser letras y los restantes numeros`);
+  }
+
+  validarTitulo(titulo){
+    if(this.validarCadenas("IMDB titulo",titulo))
+      this.validarLongitudCadena("titulo",titulo,100) 
+  }
+
+  validarDirector(director){
+    if(this.validarCadenas("IMDB director",director))
+      this.validarLongitudCadena("director",director,50); 
+  }
+
+  validarAnioEstreno(anioEstreno){
+    if(this.validarNumero("IMDB Año de Estreno", anioEstreno))
+      if(!(/^[0-9]{4}$/.test(anioEstreno)))
+        return console.error(`${anioEstreno} no se acepta: Debe cumplir con cuatro digitos`);
+  }
+
+  validarPaises(paises){
+    this.validarArreglo("IMDB Paises", paises)
+  }
+
+  validarGeneros(generos){
+    if(!this.validarArreglo("IMDB Generos", generos)) return;
+    for (let genero of generos) {
+      if (!Pelicula.listaGeneros.includes(genero)){
+        console.error(`Genero(s) incorrecto: ${generos.join(", ")}`);
+        Pelicula.generosAceptados();
+      }
+    }
+  }
+
+  validarCalificacion(calf){
+    if(!this.validarNumero("IMDB Calificacion",calf)) return
+    return (calf < 0 || calf > 10) ? console.error("La calificacion debe estar en un rango de 0-10")
+      : this.calificacion = calf.toFixed(1) 
+  }
+
+  //ficha tecnica de la pelicula
+  mostrarFichaTecnica(){
+    console.info(`Ficha tecnica:\nTitulo: ${this.titulo}\nDirector: ${this.director}\nAño de Estreno: ${
+      this.anioEstreno}\nPais: ${this.pais.join(" - ")}\nGeneros: ${
+      this.generos.join(" - ")}\nCalificacion: ${this.calificacion}`);
+  }
+}
+
+/* const movie = new Pelicula({
+  id: "tt1234567",
+  titulo : "Django Sin cadenas",
+  director: "Quentin Tarantino",
+  anioEstreno : 2012,
+  pais: ["EEUU"],
+  generos: ["Western", "Action","Comedy"],
+  calificacion: 9.453 
+});
+
+movie.mostrarFichaTecnica(); */
+
+const misPelis = [
+  {
+    id: "tt1234567",
+    titulo : "Django Sin cadenas",
+    director: "Quentin Tarantino",
+    anioEstreno : 2012,
+    pais: ["EEUU"],
+    generos: ["Western", "Action","Comedy"],
+    calificacion: 9.453
+  },
+  {
+    id: "tt1225567",
+    titulo : "Interstellar",
+    director: "Christopher Nolan",
+    anioEstreno : 2014,
+    pais: ["EEUU"],
+    generos: ["Sci-Fi","Adventure"],
+    calificacion: 9.9
+  },
+  {
+    id: "tt1237452",
+    titulo : "Wakanda Forever",
+    director: "Ryan Coogler",
+    anioEstreno : 2022,
+    pais: ["EEUU"],
+    generos: ["Action","Adventure"],
+    calificacion: 9.2
+  }
+];
+misPelis.forEach(el => new Pelicula(el).mostrarFichaTecnica());
